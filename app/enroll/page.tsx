@@ -64,24 +64,24 @@ export default function EnrollPage() {
   return (
     <div
       className="relative min-h-dvh flex items-center justify-center px-4 py-6 font-inter overflow-hidden"
-      style={{ background: 'radial-gradient(ellipse at top, #064e3b 0%, #022c22 45%, #090d16 100%)' }}
+      style={{ background: 'radial-gradient(ellipse at top, #1e3a8a 0%, #0f172a 45%, #020617 100%)' }}
     >
       {/* ── Ambient Glows representing security/transparency ── */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-emerald-500/10 blur-[80px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-blue-600/10 blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 w-full max-w-sm flex flex-col items-center rounded-3xl border border-emerald-500/20 bg-emerald-950/20 px-7 py-8 backdrop-blur-2xl shadow-[0_0_0_1px_rgba(16,185,129,0.15),0_24px_50px_-12px_rgba(0,0,0,0.7)]">
+      <div className="relative z-10 w-full max-w-sm flex flex-col items-center rounded-3xl border border-slate-100 bg-white/95 px-7 py-8 backdrop-blur-2xl shadow-[0_24px_50px_-12px_rgba(15,23,42,0.25)]">
 
         {/* ── Brand ── */}
         <div className="flex items-center gap-2.5 mb-8">
           <LaskadLogo />
-          <span className="text-xl font-bold text-white tracking-tight">Laskad</span>
+          <span className="text-xl font-bold text-slate-900 tracking-tight">Laskad</span>
         </div>
 
         {/* ── Loading ── */}
         {step === 'loading' && (
           <div className="flex flex-col items-center gap-3">
-            <div className="h-10 w-10 rounded-full border-[3px] border-emerald-500/20 border-t-emerald-400 animate-spin" />
-            <p className="text-xs text-emerald-400/50">Preparing enrollment…</p>
+            <div className="h-10 w-10 rounded-full border-[3px] border-blue-500/20 border-t-blue-600 animate-spin" />
+            <p className="text-xs text-slate-500">Preparing enrollment…</p>
           </div>
         )}
 
@@ -91,8 +91,8 @@ export default function EnrollPage() {
             <IconCircle color="amber">
               <InfoSvg />
             </IconCircle>
-            <h1 className="text-[22px] font-bold text-white tracking-tight">Not Supported</h1>
-            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
+            <h1 className="text-[22px] font-bold text-slate-900 tracking-tight">Not Supported</h1>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-[300px] text-center">
               Your browser or device doesn't support biometric authentication. Please use a modern browser on your phone.
             </p>
           </StateBlock>
@@ -102,8 +102,8 @@ export default function EnrollPage() {
         {step === 'ready' && (
           <StateBlock>
             <FingerprintRing scanning={false} />
-            <h1 className="text-[22px] font-bold text-white tracking-tight">Enable Biometrics</h1>
-            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
+            <h1 className="text-[22px] font-bold text-slate-900 tracking-tight">Enable Biometrics</h1>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-[300px] text-center">
               Use your Face ID or fingerprint to authorize Laskad transactions — instantly, no PIN needed.
             </p>
             <ul className="w-full text-left space-y-2.5 my-1">
@@ -112,7 +112,7 @@ export default function EnrollPage() {
                 "Secured by your device's biometrics",
                 'Your fingerprint never leaves your phone',
               ].map((text) => (
-                <li key={text} className="flex items-center gap-2.5 text-[13px] text-emerald-100/75">
+                <li key={text} className="flex items-center gap-2.5 text-[13px] text-slate-700">
                   <CheckIcon />
                   {text}
                 </li>
@@ -122,7 +122,7 @@ export default function EnrollPage() {
             <button
               id="btn-enroll"
               onClick={handleEnroll}
-              className="mt-2 w-full flex items-center justify-center gap-2 rounded-2xl border-0 bg-gradient-to-br from-emerald-500 to-teal-700 px-6 py-[14px] text-[15px] font-semibold text-white cursor-pointer transition-all duration-200 shadow-[0_4px_24px_rgba(16,185,129,0.3)] hover:-translate-y-px hover:shadow-[0_8px_32px_rgba(16,185,129,0.4)] active:translate-y-0"
+              className="mt-2 w-full flex items-center justify-center gap-2 rounded-2xl border-0 bg-gradient-to-br from-blue-700 to-indigo-900 px-6 py-[14px] text-[15px] font-semibold text-white cursor-pointer transition-all duration-200 shadow-[0_4px_24px_rgba(29,78,216,0.3)] hover:-translate-y-px hover:shadow-[0_8px_32px_rgba(29,78,216,0.4)] active:translate-y-0"
             >
               <FingerprintSvg size={18} />
               Set Up Biometrics
@@ -134,8 +134,8 @@ export default function EnrollPage() {
         {step === 'scanning' && (
           <StateBlock>
             <FingerprintRing scanning={true} />
-            <h1 className="text-[22px] font-bold text-white tracking-tight">Follow the Prompt</h1>
-            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
+            <h1 className="text-[22px] font-bold text-slate-900 tracking-tight">Follow the Prompt</h1>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-[300px] text-center">
               Complete the biometric prompt shown by your device to finish enrollment.
             </p>
           </StateBlock>
@@ -149,11 +149,11 @@ export default function EnrollPage() {
                 <path d="M20 6L9 17l-5-5" />
               </svg>
             </IconCircle>
-            <h1 className="text-[22px] font-bold text-white tracking-tight">You're All Set!</h1>
-            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
+            <h1 className="text-[22px] font-bold text-slate-900 tracking-tight">You're All Set!</h1>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-[300px] text-center">
               Biometrics enrolled successfully. The next time you make a transaction on Laskad, just tap the link and authenticate with your face or fingerprint.
             </p>
-            <p className="text-xs text-emerald-400/50">You can close this window.</p>
+            <p className="text-xs text-slate-400">You can close this window.</p>
           </StateBlock>
         )}
 
@@ -163,11 +163,11 @@ export default function EnrollPage() {
             <IconCircle color="emerald">
               <InfoSvg />
             </IconCircle>
-            <h1 className="text-[22px] font-bold text-white tracking-tight">Already Enrolled</h1>
-            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
+            <h1 className="text-[22px] font-bold text-slate-900 tracking-tight">Already Enrolled</h1>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-[300px] text-center">
               This device is already registered for biometric authentication. You're ready to go!
             </p>
-            <p className="text-xs text-emerald-400/50">You can close this window.</p>
+            <p className="text-xs text-slate-400">You can close this window.</p>
           </StateBlock>
         )}
 
@@ -179,13 +179,13 @@ export default function EnrollPage() {
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </IconCircle>
-            <h1 className="text-[22px] font-bold text-white tracking-tight">Something Went Wrong</h1>
-            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">{errorMsg}</p>
+            <h1 className="text-[22px] font-bold text-slate-900 tracking-tight">Something Went Wrong</h1>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-[300px] text-center">{errorMsg}</p>
             {userId && (
               <button
                 id="btn-retry"
                 onClick={() => { setErrorMsg(''); setStep('ready'); }}
-                className="mt-1 w-full rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-6 py-[13px] text-sm font-medium text-emerald-300 cursor-pointer transition-all duration-200 hover:bg-emerald-500/20"
+                className="mt-1 w-full rounded-2xl border border-slate-200 bg-slate-50 px-6 py-[13px] text-sm font-medium text-slate-700 cursor-pointer transition-all duration-200 hover:bg-slate-100"
               >
                 Try Again
               </button>
@@ -194,14 +194,14 @@ export default function EnrollPage() {
         )}
 
         {/* ── Transparency Shield / Security Guarantee ── */}
-        <div className="mt-6 pt-5 border-t border-emerald-500/10 w-full text-center">
-          <div className="flex items-center justify-center gap-1.5 mb-1.5 text-emerald-400">
+        <div className="mt-6 pt-5 border-t border-slate-100 w-full text-center">
+          <div className="flex items-center justify-center gap-1.5 mb-1.5 text-blue-600">
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
             <span className="text-xs font-semibold tracking-wide uppercase">Privacy & Transparency</span>
           </div>
-          <p className="text-[11px] leading-normal text-emerald-100/40 max-w-[280px] mx-auto">
+          <p className="text-[11px] leading-normal text-slate-400 max-w-[280px] mx-auto">
             Laskad never accesses, stores, or transmits your actual fingerprint or Face ID data. All biometrics are verified securely on-device by your hardware key processor.
           </p>
         </div>
@@ -222,10 +222,10 @@ function StateBlock({ children }: { children: React.ReactNode }) {
 
 type Color = 'emerald' | 'red' | 'amber' | 'indigo';
 const colorMap: Record<Color, string> = {
-  emerald: 'bg-emerald-500/[0.12] border-emerald-500/30 text-emerald-400',
-  red:     'bg-red-500/[0.12]     border-red-500/30     text-red-400',
-  amber:   'bg-amber-500/[0.12]   border-amber-500/30   text-amber-400',
-  indigo:  'bg-indigo-500/[0.12]  border-indigo-500/30  text-indigo-400',
+  emerald: 'bg-blue-50 border-blue-200 text-blue-600',
+  red:     'bg-red-50 border-red-200 text-red-500',
+  amber:   'bg-amber-50 border-amber-200 text-amber-600',
+  indigo:  'bg-indigo-50 border-indigo-200 text-indigo-600',
 };
 
 function IconCircle({
