@@ -61,6 +61,10 @@ export default function VerifyPage() {
         throw new Error(err.message ?? 'Signature verification failed');
       }
       setStep('success');
+      // Auto-redirect to WhatsApp after 3 seconds
+      setTimeout(() => {
+        window.location.href = 'https://wa.me/message/LASKAD'; // or standard 'https://wa.me/...' deep link
+      }, 3000);
     } catch (err: any) {
       // User dismissed the prompt — silently go back to ready
       if (err?.name === 'NotAllowedError') { setStep('ready'); return; }
@@ -72,20 +76,20 @@ export default function VerifyPage() {
   return (
     <div
       className="relative min-h-dvh overflow-hidden flex items-center justify-center px-4 py-6 font-inter"
-      style={{ background: 'radial-gradient(ellipse at 60% 0%, #1e1b4b 0%, #0f0e17 55%)' }}
+      style={{ background: 'radial-gradient(ellipse at 60% 0%, #064e3b 0%, #022c22 45%, #090d16 100%)' }}
     >
       {/* ── Ambient orbs ── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-20 -right-20 h-80 w-80 rounded-full bg-indigo-500/[0.18] blur-[80px]"
+        className="pointer-events-none absolute -top-20 -right-20 h-80 w-80 rounded-full bg-emerald-500/[0.1] blur-[80px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-16 -left-16 h-60 w-60 rounded-full bg-violet-500/[0.12] blur-[80px]"
+        className="pointer-events-none absolute -bottom-16 -left-16 h-60 w-60 rounded-full bg-teal-500/[0.08] blur-[80px]"
       />
 
       {/* ── Card ── */}
-      <div className="relative z-10 w-full max-w-sm flex flex-col items-center rounded-3xl border border-white/[0.09] bg-white/[0.04] px-7 py-8 backdrop-blur-2xl shadow-[0_0_0_1px_rgba(99,102,241,0.12),0_32px_80px_rgba(0,0,0,0.55)]">
+      <div className="relative z-10 w-full max-w-sm flex flex-col items-center rounded-3xl border border-emerald-500/20 bg-emerald-950/20 px-7 py-8 backdrop-blur-2xl shadow-[0_0_0_1px_rgba(16,185,129,0.15),0_24px_50px_-12px_rgba(0,0,0,0.7)]">
 
         {/* ── Brand ── */}
         <div className="flex items-center gap-2.5 mb-8">
@@ -96,8 +100,8 @@ export default function VerifyPage() {
         {/* ── Loading ── */}
         {step === 'loading' && (
           <div className="flex flex-col items-center gap-3">
-            <div className="h-10 w-10 rounded-full border-[3px] border-indigo-500/20 border-t-indigo-500 animate-spin" />
-            <p className="text-xs text-white/30">Loading verification…</p>
+            <div className="h-10 w-10 rounded-full border-[3px] border-emerald-500/20 border-t-emerald-400 animate-spin" />
+            <p className="text-xs text-emerald-400/50">Loading verification…</p>
           </div>
         )}
 
@@ -106,7 +110,7 @@ export default function VerifyPage() {
           <StateBlock>
             <WarnIcon />
             <h1 className="text-[22px] font-bold text-white tracking-tight">Not Supported</h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-[300px] text-center">
+            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
               Your browser doesn't support biometric authentication. Open this link on a modern mobile browser like Chrome or Safari.
             </p>
           </StateBlock>
@@ -117,7 +121,7 @@ export default function VerifyPage() {
           <StateBlock>
             <WarnIcon />
             <h1 className="text-[22px] font-bold text-white tracking-tight">Link Expired</h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-[300px] text-center">
+            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
               This verification link has expired or is invalid. Please retry your transaction on WhatsApp to receive a fresh link.
             </p>
           </StateBlock>
@@ -128,8 +132,8 @@ export default function VerifyPage() {
           <StateBlock>
             {/* Amount pill */}
             {txInfo.amount && (
-              <div className="flex flex-col items-center rounded-2xl border border-indigo-500/25 bg-indigo-500/10 px-6 py-3 mb-1">
-                <span className="text-[11px] uppercase tracking-widest text-white/40 mb-1">Transaction Amount</span>
+              <div className="flex flex-col items-center rounded-2xl border border-emerald-500/25 bg-emerald-500/10 px-6 py-3 mb-1">
+                <span className="text-[11px] uppercase tracking-widest text-emerald-400/50 mb-1">Transaction Amount</span>
                 <span className="text-[28px] font-bold text-white tracking-tight">
                   ₦{Number(txInfo.amount).toLocaleString('en-NG')}
                 </span>
@@ -138,38 +142,38 @@ export default function VerifyPage() {
 
             {/* Fingerprint ring with pulse */}
             <div className="relative mb-1 flex items-center justify-center">
-              <div className="absolute inset-0 -m-3 rounded-full border border-indigo-500/20 animate-pulse-ring" />
-              <div className="w-[108px] h-[108px] rounded-full border border-indigo-500/30 bg-indigo-500/[0.08] flex items-center justify-center text-indigo-400">
+              <div className="absolute inset-0 -m-3 rounded-full border border-emerald-500/20 animate-pulse-ring" />
+              <div className="w-[108px] h-[108px] rounded-full border border-emerald-500/30 bg-emerald-500/[0.08] flex items-center justify-center text-emerald-400">
                 <FingerprintSvg size={52} />
               </div>
             </div>
 
             <h1 className="text-[22px] font-bold text-white tracking-tight">Authorize Transaction</h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-[300px] text-center">
+            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
               Verify your identity using your biometrics to securely authorize this transaction.
             </p>
 
             <button
               id="btn-verify"
               onClick={handleVerify}
-              className="mt-1.5 w-full flex items-center justify-center gap-2 rounded-2xl border-0 bg-gradient-to-br from-indigo-500 to-indigo-700 px-6 py-[15px] text-[15px] font-semibold text-white cursor-pointer transition-all duration-200 shadow-[0_4px_28px_rgba(99,102,241,0.4)] hover:-translate-y-px hover:shadow-[0_8px_36px_rgba(99,102,241,0.5)] active:translate-y-0"
+              className="mt-1.5 w-full flex items-center justify-center gap-2 rounded-2xl border-0 bg-gradient-to-br from-emerald-500 to-teal-700 px-6 py-[15px] text-[15px] font-semibold text-white cursor-pointer transition-all duration-200 shadow-[0_4px_28px_rgba(16,185,129,0.3)] hover:-translate-y-px hover:shadow-[0_8px_36px_rgba(16,185,129,0.4)] active:translate-y-0"
             >
               <FingerprintSvg size={18} />
               Verify with Biometrics
             </button>
 
-            <p className="text-xs text-white/30">⏱ This link expires in 5 minutes</p>
+            <p className="text-xs text-emerald-400/40">⏱ This link expires in 5 minutes</p>
           </StateBlock>
         )}
 
         {/* ── Scanning ── */}
         {step === 'scanning' && (
           <StateBlock>
-            <div className="w-[108px] h-[108px] rounded-full border border-indigo-500/60 bg-indigo-500/[0.08] flex items-center justify-center text-indigo-400 animate-breathe mb-1">
+            <div className="w-[108px] h-[108px] rounded-full border border-emerald-500/60 bg-emerald-500/[0.08] flex items-center justify-center text-emerald-400 animate-breathe mb-1">
               <FingerprintSvg size={52} />
             </div>
             <h1 className="text-[22px] font-bold text-white tracking-tight">Complete the Prompt</h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-[300px] text-center">
+            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
               Use your face or fingerprint to confirm the transaction on your device.
             </p>
           </StateBlock>
@@ -184,7 +188,7 @@ export default function VerifyPage() {
               </svg>
             </div>
             <h1 className="text-[22px] font-bold text-white tracking-tight">Transaction Authorized</h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-[300px] text-center">
+            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">
               Your biometric signature has been verified. Your transaction is now being processed — you'll receive a WhatsApp confirmation shortly.
             </p>
             {/* Processing badge */}
@@ -192,7 +196,12 @@ export default function VerifyPage() {
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-blink-dot" />
               Processing…
             </div>
-            <p className="text-xs text-white/30">You can close this window.</p>
+            <a
+              href="https://wa.me/message/LASKAD"
+              className="mt-1 w-full flex items-center justify-center gap-2 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-6 py-[13px] text-sm font-semibold text-emerald-300 transition-all duration-200 hover:bg-emerald-500/20 text-center"
+            >
+              Return to WhatsApp
+            </a>
           </StateBlock>
         )}
 
@@ -205,12 +214,12 @@ export default function VerifyPage() {
               </svg>
             </div>
             <h1 className="text-[22px] font-bold text-white tracking-tight">Verification Failed</h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-[300px] text-center">{errorMsg}</p>
+            <p className="text-sm text-emerald-100/60 leading-relaxed max-w-[300px] text-center">{errorMsg}</p>
             {token && (
               <button
                 id="btn-retry"
                 onClick={() => { setErrorMsg(''); setStep('ready'); }}
-                className="mt-1 w-full rounded-2xl border border-white/15 bg-white/[0.06] px-6 py-[13px] text-sm font-medium text-white/80 cursor-pointer transition-all duration-200 hover:bg-white/10 hover:border-white/25"
+                className="mt-1 w-full rounded-2xl border border-emerald-500/25 bg-emerald-500/10 px-6 py-[13px] text-sm font-medium text-emerald-300 cursor-pointer transition-all duration-200 hover:bg-emerald-500/20"
               >
                 Try Again
               </button>
@@ -218,9 +227,18 @@ export default function VerifyPage() {
           </StateBlock>
         )}
 
-        <p className="mt-7 text-center text-[11px] leading-relaxed text-white/20">
-          Secured by WebAuthn · Biometric data never leaves your device
-        </p>
+        {/* ── Transparency Shield / Security Guarantee ── */}
+        <div className="mt-6 pt-5 border-t border-emerald-500/10 w-full text-center">
+          <div className="flex items-center justify-center gap-1.5 mb-1.5 text-emerald-400">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span className="text-xs font-semibold tracking-wide uppercase">Privacy & Transparency</span>
+          </div>
+          <p className="text-[11px] leading-normal text-emerald-100/40 max-w-[280px] mx-auto">
+            Laskad never accesses, stores, or transmits your actual fingerprint or Face ID data. All biometrics are verified securely on-device by your hardware key processor.
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -263,15 +281,10 @@ function FingerprintSvg({ size }: { size: number }) {
 
 function LaskadLogo() {
   return (
-    <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="16" r="15" stroke="url(#vlg1)" strokeWidth="2" />
-      <path d="M10 22V10l6 9 6-9v12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <defs>
-        <linearGradient id="vlg1" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#818cf8" />
-          <stop offset="1" stopColor="#6366f1" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <img
+      src="/images/logo.png"
+      alt="Laskad Logo"
+      className="w-9 h-9 object-contain rounded-lg"
+    />
   );
 }
