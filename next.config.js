@@ -22,6 +22,11 @@ const nextConfig = {
         destination: '/enroll',
         permanent: false,
       },
+      {
+        source: '/s/:code*',
+        destination: '/verify?token=:code*',
+        permanent: false, // 302 temporary redirect
+      },
     ];
   },
 };
