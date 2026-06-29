@@ -17,6 +17,7 @@ export default function VerifyPage() {
   const [token, setToken] = useState<string | null>(null);
   const [txInfo, setTxInfo] = useState<TransactionInfo>({});
   const [errorMsg, setErrorMsg] = useState('');
+  const [redirectUrl, setRedirectUrl] = useState('https://wa.me/2348085614502');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -60,10 +61,13 @@ export default function VerifyPage() {
         }
         throw new Error(err.message ?? 'Signature verification failed');
       }
+      const verifyData = await verifyRes.json().catch(() => ({}));
+      const rUrl = verifyData.redirectUrl || 'https://wa.me/2348085614502';
+      setRedirectUrl(rUrl);
       setStep('success');
       // Auto-redirect to WhatsApp after 3 seconds
       setTimeout(() => {
-        window.location.href = 'https://wa.me/message/LASKAD'; // or standard 'https://wa.me/...' deep link
+        window.location.href = rUrl;
       }, 3000);
     } catch (err: any) {
       // User dismissed the prompt — silently go back to ready
@@ -197,7 +201,7 @@ export default function VerifyPage() {
               Processing…
             </div>
             <a
-              href="https://wa.me/message/LASKAD"
+              href={redirectUrl}
               className="mt-1 w-full flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-[13px] text-sm font-semibold text-slate-700 transition-all duration-200 hover:bg-slate-100 text-center"
             >
               Return to WhatsApp

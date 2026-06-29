@@ -11,6 +11,7 @@ export default function EnrollPage() {
   const [step, setStep] = useState<Step>('loading');
   const [userId, setUserId] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
+  const [redirectUrl, setRedirectUrl] = useState('https://wa.me/2348085614502');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -50,7 +51,14 @@ export default function EnrollPage() {
         const err = await verifyRes.json().catch(() => ({}));
         throw new Error(err.message ?? 'Verification failed');
       }
+      const verifyData = await verifyRes.json().catch(() => ({}));
+      const rUrl = verifyData.redirectUrl || 'https://wa.me/2348085614502';
+      setRedirectUrl(rUrl);
       setStep('success');
+      // Auto-redirect to WhatsApp after 3 seconds
+      setTimeout(() => {
+        window.location.href = rUrl;
+      }, 3000);
     } catch (err: any) {
       // User cancelled — not a real error
       if (err?.name === 'NotAllowedError') { setStep('ready'); return; }
@@ -153,7 +161,13 @@ export default function EnrollPage() {
             <p className="text-sm text-slate-600 leading-relaxed max-w-[300px] text-center">
               Biometrics enrolled successfully. The next time you make a transaction on Laskad, just tap the link and authenticate with your face or fingerprint.
             </p>
-            <p className="text-xs text-slate-400">You can close this window.</p>
+            <a
+              href={redirectUrl}
+              className="mt-1 w-full flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-[13px] text-sm font-semibold text-slate-700 transition-all duration-200 hover:bg-slate-100 text-center"
+            >
+              Return to WhatsApp
+            </a>
+            <p className="text-xs text-slate-400">You can close this window or wait to be redirected.</p>
           </StateBlock>
         )}
 
