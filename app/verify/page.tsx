@@ -250,7 +250,7 @@ export default function VerifyPage() {
             {errorMsg && (
               <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-left w-full">
                 <svg className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
                 </svg>
                 <p className="text-[13px] text-amber-800 leading-relaxed">{errorMsg}</p>
               </div>
@@ -258,8 +258,8 @@ export default function VerifyPage() {
 
             <div className="w-16 h-16 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-500 mb-1">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
             </div>
 
@@ -281,14 +281,14 @@ export default function VerifyPage() {
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                   aria-hidden="true"
                 >
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
                 <input
                   ref={pwInputRef}
                   id="verify-password-input"
                   type="password"
-                  inputMode="numeric"
+                  // inputMode="numeric"
                   autoComplete="current-password"
                   placeholder="Enter PIN or password"
                   value={password}
@@ -318,7 +318,7 @@ export default function VerifyPage() {
                 ) : (
                   <>
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                      <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                     Authorize Transaction
                   </>
@@ -327,10 +327,11 @@ export default function VerifyPage() {
 
               <button
                 type="button"
-                onClick={() => { setErrorMsg(''); setStep('ready'); }}
-                className="text-[13px] text-slate-500 hover:text-slate-700 transition-colors py-1"
+                onClick={() => { setErrorMsg(''); setPassword(''); setPwError(''); setStep('ready'); }}
+                className="w-full flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-[13px] text-[14px] font-medium text-slate-600 cursor-pointer transition-all duration-200 hover:bg-slate-100 hover:text-slate-800 hover:border-slate-300 active:scale-[0.98]"
               >
-                ← Try biometrics instead
+                <FingerprintSvg size={16} />
+                Try biometrics again
               </button>
             </form>
           </StateBlock>
