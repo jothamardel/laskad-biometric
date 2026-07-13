@@ -2,6 +2,7 @@ import "./css/style.css";
 
 import { Inter, Inter_Tight } from "next/font/google";
 import Theme from "./theme-provider";
+import InstallPrompt from "../components/install-prompt";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,16 +40,20 @@ export default function RootLayout({
             {children}
           </div>
         </Theme>
-        {/* Service Worker Registration for PWA Install prompt */}
+
+        {/* PWA install prompt (Android native + iOS manual instructions) */}
+        <InstallPrompt />
+
+        {/* Service Worker Registration for PWA */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js').then(function(reg) {
-                    console.log('ServiceWorker registration successful with scope: ', reg.scope);
+                    console.log('[SW] Registered:', reg.scope);
                   }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
+                    console.warn('[SW] Registration failed:', err);
                   });
                 });
               }
